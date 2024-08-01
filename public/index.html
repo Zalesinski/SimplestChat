@@ -2,17 +2,20 @@
 <html>
     <head>
         <title>Simple Chat App</title>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div id="messages"></div>
-        <form id="message-form">
-            <input
-                id="message-input"
-                type="text"
-                placeholder="Type your message"
-            />
-            <button type="submit">Send</button>
-        </form>
+        <div id="chat-container">
+            <div id="messages"></div>
+            <form id="message-form">
+                <input
+                    id="message-input"
+                    type="text"
+                    placeholder="Type your message"
+                />
+                <button type="submit">Send</button>
+            </form>
+        </div>
         <script src="/socket.io/socket.io.js"></script>
         <script src="messageUtils.js"></script>
         <script src="client.js"></script>
