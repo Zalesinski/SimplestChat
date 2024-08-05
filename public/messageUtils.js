@@ -1,5 +1,6 @@
 function createMessageElement(message) {
     const item = document.createElement("li");
-    item.textContent = `${message.username}: ${message.message}`;
+    item.style.color = message.user.color;
+    item.textContent = `${message.user.username}: ${message.textContent}`;
     messages.appendChild(item);
 }

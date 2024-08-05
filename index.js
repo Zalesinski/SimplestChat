@@ -3,6 +3,8 @@ const http = require("http");
 const { disconnect } = require("process");
 const { Server } = require("socket.io");
 
+const generateRandomColor = require("./utils");
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
@@ -19,17 +21,18 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         console.log("A user has disconnected");
-        // users.delete(socket.id);
+        users.delete(socket.id);
     });
 
     socket.on("set username", (username) => {
-        users.set(socket.id, username);
-        socket.emit("user connected", username);
+        const color = generateRandomColor();
+        users.set(socket.id, { username, color });
+        socket.emit("user connected", { username, color });
     });
 
-    socket.on("chat message", (msg) => {
+    socket.on("chat message", (textContent) => {
         const user = users.get(socket.id);
-        const message = { username: user, message: msg };
+        const message = { user, textContent };
         messages.push(message);
         io.emit("chat message", message);
     });
